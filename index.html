@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Keluarga NDB - RT 06 RW 70</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -26,6 +26,18 @@
       --shadow-strong: 0 8px 24px rgba(13, 92, 63, 0.20);
     }
 
+    /* ============================================================
+       FIX: Kunci horizontal scroll
+       ============================================================ */
+    * { box-sizing: border-box; }
+
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+      position: relative;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(180deg, #f0fdf4 0%, #f8faf9 100%);
@@ -41,6 +53,13 @@
       box-shadow: 0 2px 12px rgba(6, 78, 59, 0.25);
     }
     .navbar-brand { letter-spacing: 0.5px; }
+    .navbar .container { flex-wrap: nowrap; }
+    .navbar .navbar-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 50vw;
+    }
     .navbar .btn-outline-light {
       border-color: rgba(255,255,255,0.5);
       transition: all 0.2s;
@@ -49,6 +68,29 @@
       background: rgba(255,255,255,0.15);
       border-color: rgba(255,255,255,0.9);
     }
+    /* Tombol logout icon-only */
+    .btn-logout-icon {
+      color: white;
+      background: transparent;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: none;
+      outline: none;
+    }
+    .btn-logout-icon:hover,
+    .btn-logout-icon:focus {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      outline: none;
+      box-shadow: none;
+    }
+    .btn-logout-icon i { font-size: 1.15rem; }
 
     /* KOTAK SALDO STICKY */
     .saldo-wrapper {
@@ -57,9 +99,12 @@
       z-index: 1020;
       background: rgba(240, 253, 244, 0.95);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       padding-top: 15px;
       padding-bottom: 10px;
       margin-bottom: 5px;
+      max-width: 100%;
+      overflow-x: hidden;
     }
     .saldo-display {
       background: var(--gradient-saldo);
@@ -106,8 +151,17 @@
       margin: 10px 0;
       text-shadow: 0 2px 8px rgba(0,0,0,0.15);
       letter-spacing: -0.5px;
+      word-break: break-word;
     }
     .saldo-update { font-size: 0.85rem; opacity: 0.9; }
+
+    /* CONTAINER */
+    .container {
+      max-width: 100%;
+      padding-left: 12px;
+      padding-right: 12px;
+      box-sizing: border-box;
+    }
 
     /* CARD */
     .card {
@@ -117,6 +171,11 @@
       margin-bottom: 15px;
       transition: all 0.25s ease;
       background: white;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
     .card:hover {
       transform: translateY(-2px);
@@ -129,6 +188,10 @@
       font-weight: 600;
       color: var(--text-dark);
       border-radius: 14px 14px 0 0 !important;
+    }
+    .card-body {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     /* TOMBOL */
@@ -169,6 +232,9 @@
       margin-bottom: 8px;
       background: white;
       border: 1px solid var(--border-soft);
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
     }
     .warga-item:hover {
       background: #f0fdf4;
@@ -189,6 +255,7 @@
       z-index: 999;
       padding: 20px;
       overflow-y: auto;
+      overflow-x: hidden;
     }
     #loginScreen .login-container {
       max-width: 440px;
@@ -199,6 +266,7 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       margin: auto;
       position: relative;
+      box-sizing: border-box;
     }
     #loginScreen .logo-container { display: flex; justify-content: center; margin-bottom: 1.5rem; }
     #loginScreen .logo-circle {
@@ -242,6 +310,8 @@
       border: 2px solid #e5e7eb;
       transition: all 0.2s;
       font-size: 0.95rem;
+      max-width: 100%;
+      box-sizing: border-box;
     }
     .form-control:focus {
       border-color: var(--secondary-color);
@@ -251,6 +321,8 @@
       border-radius: 10px;
       border: 2px solid #e5e7eb;
       transition: all 0.2s;
+      max-width: 100%;
+      box-sizing: border-box;
     }
     .form-select:focus {
       border-color: var(--secondary-color);
@@ -308,13 +380,21 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* NAV TABS */
+    /* NAV TABS - boleh scroll horizontal */
     .nav-tabs {
       border-bottom: 2px solid var(--border-soft);
       background: white;
       border-radius: 10px 10px 0 0;
       padding: 5px 10px 0 10px;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-tabs .nav-item { flex-shrink: 0; }
     .nav-tabs .nav-link {
       color: #4b5563;
       border: none;
@@ -322,6 +402,7 @@
       padding: 10px 14px;
       transition: all 0.2s;
       border-radius: 8px 8px 0 0;
+      white-space: nowrap;
     }
     .nav-tabs .nav-link:hover {
       color: var(--primary-color);
@@ -348,6 +429,8 @@
       padding: 15px;
       margin-bottom: 15px;
       border: 1px solid var(--border-soft);
+      max-width: 100%;
+      box-sizing: border-box;
     }
     .filter-row {
       display: flex;
@@ -356,7 +439,7 @@
       flex-wrap: wrap;
       align-items: flex-end;
     }
-    .filter-item { flex: 1; min-width: 140px; }
+    .filter-item { flex: 1; min-width: 140px; max-width: 100%; }
     .filter-item label {
       font-size: 0.85rem;
       margin-bottom: 4px;
@@ -438,11 +521,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     /* TAB CONTENT */
-    .tab-content { position: relative; }
-    .tab-content > .tab-pane { min-height: 0; padding: 0; margin: 0; }
+    .tab-content {
+      position: relative;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .tab-content > .tab-pane {
+      min-height: 0;
+      padding: 0;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
     .tab-content > .tab-pane.active { display: block; }
     .tab-content > .tab-pane:not(.active) { display: none; }
     #mainTabs { margin-bottom: 0 !important; }
@@ -469,6 +564,9 @@
     }
     .alert-info .fas { color: var(--primary-color); }
 
+    /* INPUT GLOBAL */
+    input, select, textarea, button { max-width: 100%; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .saldo-amount { font-size: 2rem; }
@@ -477,8 +575,9 @@
       .filter-row { flex-direction: column; }
       .filter-item { min-width: 100%; }
       .saldo-wrapper { top: 56px; padding-top: 10px; }
-      .nav-tabs { overflow-x: auto; flex-wrap: nowrap; }
-      .nav-tabs .nav-link { white-space: nowrap; font-size: 0.85rem; padding: 8px 10px; }
+      .nav-tabs .nav-link { font-size: 0.85rem; padding: 8px 10px; }
+      .navbar .navbar-text { font-size: 0.85rem; max-width: 40vw; }
+      .btn-logout-icon i { font-size: 1.1rem; }
     }
   </style>
 </head>
@@ -524,8 +623,8 @@
     <div class="container">
       <span class="navbar-brand fw-bold"><i class="fas fa-home me-2"></i>Keluarga NDB</span>
       <span class="navbar-text ms-auto" id="userInfo"></span>
-      <button class="btn btn-link text-white p-1 ms-2" onclick="logout()" title="Keluar" style="text-decoration: none; box-shadow: none;">
-        <i class="fas fa-sign-out-alt" style="font-size: 1.2rem;"></i>
+      <button class="btn-logout-icon ms-2" onclick="logout()" title="Keluar" aria-label="Keluar">
+        <i class="fas fa-sign-out-alt"></i>
       </button>
     </div>
   </nav>
