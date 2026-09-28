@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keluarga NDB - RT 06 RW 70</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* ============================================================
+       TEMA HIJAU PROFESIONAL
+       ============================================================ */
+    :root {
+      --primary-color: #0d5c3f;
+      --primary-hover: #0a4a32;
+      --secondary-color: #16a34a;
+      --accent-color: #22c55e;
+      --success-color: #15803d;
+      --bg-soft: #f0fdf4;
+      --border-soft: #dcfce7;
+      --text-dark: #14532d;
+      --gradient-main: linear-gradient(135deg, #0d5c3f 0%, #16a34a 50%, #22c55e 100%);
+      --gradient-saldo: linear-gradient(135deg, #064e3b 0%, #0d5c3f 30%, #16a34a 70%, #22c55e 100%);
+      --shadow-soft: 0 2px 8px rgba(13, 92, 63, 0.08);
+      --shadow-medium: 0 4px 16px rgba(13, 92, 63, 0.12);
+      --shadow-strong: 0 8px 24px rgba(13, 92, 63, 0.20);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #f0fdf4 0%, #f8faf9 100%);
+      background-attachment: fixed;
+      padding-top: 60px;
+      color: #1f2937;
+      min-height: 100vh;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: linear-gradient(90deg, #064e3b 0%, #0d5c3f 100%);
+      box-shadow: 0 2px 12px rgba(6, 78, 59, 0.25);
+    }
+    .navbar-brand { letter-spacing: 0.5px; }
+    .navbar .btn-outline-light {
+      border-color: rgba(255,255,255,0.5);
+      transition: all 0.2s;
+    }
+    .navbar .btn-outline-light:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.9);
+    }
+
+    /* KOTAK SALDO STICKY */
+    .saldo-wrapper {
+      position: sticky;
+      top: 60px;
+      z-index: 1020;
+      background: rgba(240, 253, 244, 0.95);
+      backdrop-filter: blur(8px);
+      padding-top: 15px;
+      padding-bottom: 10px;
+      margin-bottom: 5px;
+    }
+    .saldo-display {
+      background: var(--gradient-saldo);
+      color: white;
+      border-radius: 16px;
+      padding: 22px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-strong);
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .saldo-display::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .saldo-display::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .saldo-display > * { position: relative; z-index: 1; }
+    .saldo-display .saldo-label {
+      font-size: 0.95rem;
+      opacity: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .saldo-amount {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin: 10px 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      letter-spacing: -0.5px;
+    }
+    .saldo-update { font-size: 0.85rem; opacity: 0.9; }
+
+    /* CARD */
+    .card {
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 15px;
+      transition: all 0.25s ease;
+      background: white;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+      border-color: #bbf7d0;
+    }
+    .card-header {
+      background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+      border-bottom: 1px solid var(--border-soft);
+      font-weight: 600;
+      color: var(--text-dark);
+      border-radius: 14px 14px 0 0 !important;
+    }
+
+    /* TOMBOL */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      box-shadow: 0 2px 6px rgba(13, 92, 63, 0.25);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+      box-shadow: 0 4px 12px rgba(13, 92, 63, 0.35);
+      transform: translateY(-1px);
+    }
+    .btn-secondary { background: #64748b; border: none; }
+    .btn-secondary:hover { background: #475569; }
+    .btn-success {
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      border: none;
+    }
+    .btn-success:hover { background: linear-gradient(135deg, #15803d, #16a34a); }
+    .btn-outline-primary {
+      color: var(--primary-color);
+      border-color: var(--secondary-color);
+    }
+    .btn-outline-primary:hover {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+
+    /* ITEM WARGA */
+    .warga-item {
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: all 0.2s;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      background: white;
+      border: 1px solid var(--border-soft);
+    }
+    .warga-item:hover {
+      background: #f0fdf4;
+      border-color: var(--secondary-color);
+      transform: translateX(4px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* LOGIN */
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #064e3b 0%, #0d5c3f 40%, #16a34a 100%);
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 999;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    #loginScreen .login-container {
+      max-width: 440px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      margin: auto;
+      position: relative;
+    }
+    #loginScreen .logo-container { display: flex; justify-content: center; margin-bottom: 1.5rem; }
+    #loginScreen .logo-circle {
+      width: 90px;
+      height: 90px;
+      background: var(--gradient-main);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(13, 92, 63, 0.35);
+      position: relative;
+    }
+    #loginScreen .logo-circle::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 2px dashed rgba(22, 163, 74, 0.4);
+      animation: spin-slow 20s linear infinite;
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    #loginScreen .logo-icon { color: white; font-size: 2.5rem; }
+    #loginScreen .header-text { text-align: center; margin-bottom: 2rem; }
+    #loginScreen .header-text h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+    #loginScreen .header-text p { color: #4b5563; margin: 0.25rem 0; font-size: 0.9rem; }
+    #loginScreen .header-text .org-name { font-weight: 600; color: var(--primary-color); }
+    .form-label { font-weight: 600; color: #374151; font-size: 0.9rem; }
+    .form-control {
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e5e7eb;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
+    .form-control:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.15);
+    }
+    .form-select {
+      border-radius: 10px;
+      border: 2px solid #e5e7eb;
+      transition: all 0.2s;
+    }
+    .form-select:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.15);
+    }
+    .password-wrapper { position: relative; }
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #6c757d;
+      background: transparent;
+      border: none;
+    }
+    .password-toggle:hover { color: var(--primary-color); }
+    .login-btn {
+      background: var(--gradient-main);
+      border: none;
+      border-radius: 10px;
+      padding: 0.85rem;
+      font-weight: 700;
+      color: white !important;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(13, 92, 63, 0.3);
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(13, 92, 63, 0.4);
+      color: white !important;
+    }
+
+    /* LOADING */
+    .loading-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(240, 253, 244, 0.85);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .loading-spinner {
+      width: 55px;
+      height: 55px;
+      border: 5px solid #dcfce7;
+      border-top: 5px solid var(--secondary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* NAV TABS */
+    .nav-tabs {
+      border-bottom: 2px solid var(--border-soft);
+      background: white;
+      border-radius: 10px 10px 0 0;
+      padding: 5px 10px 0 10px;
+    }
+    .nav-tabs .nav-link {
+      color: #4b5563;
+      border: none;
+      font-weight: 500;
+      padding: 10px 14px;
+      transition: all 0.2s;
+      border-radius: 8px 8px 0 0;
+    }
+    .nav-tabs .nav-link:hover {
+      color: var(--primary-color);
+      background: #f0fdf4;
+    }
+    .nav-tabs .nav-link.active {
+      font-weight: 700;
+      color: var(--primary-color);
+      background: white;
+      border-bottom: 3px solid var(--secondary-color);
+    }
+
+    /* STATUS */
+    .status-lunas { color: #15803d; font-weight: bold; }
+    .status-belum { color: #dc2626; font-weight: bold; }
+    .status-card { border-left: 4px solid; }
+    .status-lunas-card { border-left-color: #16a34a; }
+    .status-belum-card { border-left-color: #dc2626; }
+
+    /* FILTER */
+    .filter-container {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid var(--border-soft);
+    }
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+    .filter-item { flex: 1; min-width: 140px; }
+    .filter-item label {
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      display: block;
+      color: #374151;
+      font-weight: 600;
+    }
+    .filter-item .form-control,
+    .filter-item .form-select,
+    .filter-item .filter-button {
+      height: 42px;
+      padding: 8px 12px;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      border: 1.5px solid #d1d5db;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .filter-item .form-control:focus,
+    .filter-item .form-select:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+    }
+    .filter-item .filter-button {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .filter-item .filter-button:hover {
+      background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+      transform: translateY(-1px);
+    }
+
+    /* SHOW MORE */
+    .show-more-container { text-align: center; margin-top: 15px; padding: 10px; }
+    .show-more-btn {
+      cursor: pointer;
+      color: var(--primary-color);
+      font-weight: 600;
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 20px;
+      background: #f0fdf4;
+      border: 1px solid var(--border-soft);
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .show-more-btn:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
+    }
+    .show-more-btn:active { transform: translateY(0); }
+
+    /* MODAL */
+    .modal-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+      color: white;
+      border-radius: 14px 14px 0 0;
+      border-bottom: none;
+    }
+    .modal-header .btn-close { filter: invert(1); opacity: 0.9; }
+    .modal-content {
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+    .modal-footer { border-top: 1px solid var(--border-soft); }
+
+    /* LAIN-LAIN */
+    .pengeluaran-item strong,
+    .pengeluaran-keterangan { font-weight: normal !important; }
+    .success-icon { font-size: 4rem; color: #16a34a; margin-bottom: 15px; }
+    .card-header-with-action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* TAB CONTENT */
+    .tab-content { position: relative; }
+    .tab-content > .tab-pane { min-height: 0; padding: 0; margin: 0; }
+    .tab-content > .tab-pane.active { display: block; }
+    .tab-content > .tab-pane:not(.active) { display: none; }
+    #mainTabs { margin-bottom: 0 !important; }
+    .tab-content { margin-top: 0; }
+    .tab-content > .tab-pane > .card:first-child { margin-top: 0; }
+
+    /* BADGE */
+    .badge.bg-success { background: linear-gradient(135deg, #16a34a, #22c55e) !important; }
+    .badge.bg-info { background: linear-gradient(135deg, #0891b2, #06b6d4) !important; }
+    .badge.bg-secondary { background: #64748b !important; }
+    .badge.bg-warning { background: linear-gradient(135deg, #d97706, #f59e0b) !important; color: white; }
+    .badge.bg-primary { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important; }
+
+    /* PROGRESS */
+    .progress { background: #e5e7eb; border-radius: 4px; }
+    .progress-bar.bg-success { background: linear-gradient(90deg, #16a34a, #22c55e) !important; }
+    .progress-bar.bg-info { background: linear-gradient(90deg, #0891b2, #06b6d4) !important; }
+
+    /* ALERT */
+    .alert-info {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #14532d;
+    }
+    .alert-info .fas { color: var(--primary-color); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .saldo-amount { font-size: 2rem; }
+      #loginScreen .login-container { margin: 30px auto; padding: 1.8rem 1.5rem; }
+      #loginScreen .header-text h1 { font-size: 1.5rem; }
+      .filter-row { flex-direction: column; }
+      .filter-item { min-width: 100%; }
+      .saldo-wrapper { top: 56px; padding-top: 10px; }
+      .nav-tabs { overflow-x: auto; flex-wrap: nowrap; }
+      .nav-tabs .nav-link { white-space: nowrap; font-size: 0.85rem; padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="loading-overlay" id="globalLoading"><div class="loading-spinner"></div></div>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-container">
+    <div class="logo-container">
+      <div class="logo-circle"><i class="fas fa-home logo-icon"></i></div>
+    </div>
+    <div class="header-text">
+      <h1>Keluarga NDB</h1>
+      <p class="org-name">Angkasa Pura Indonesia</p>
+      <p>RT 06 RW 70</p>
+      <p style="font-size: 0.8rem;">Sambilegi Kidul, Maguwoharjo, Depok, Sleman, Yogyakarta</p>
+    </div>
+    <form id="loginForm">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Nomor Rumah (contoh: C06)" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="password-wrapper">
+          <input type="password" class="form-control" id="password" required placeholder="Masukkan password">
+          <button type="button" class="password-toggle" id="togglePassword"><i class="fas fa-eye" id="togglePasswordIcon"></i></button>
+        </div>
+      </div>
+      <button type="submit" class="btn login-btn w-100">
+        <i class="fas fa-sign-in-alt me-2"></i>Masuk
+      </button>
+    </form>
+    <div id="loginMessage" class="mt-3"></div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp" style="display: none;">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <span class="navbar-brand fw-bold"><i class="fas fa-home me-2"></i>Keluarga NDB</span>
+      <span class="navbar-text ms-auto" id="userInfo"></span>
+      <button class="btn btn-outline-light btn-sm ms-2" onclick="logout()">
+        <i class="fas fa-sign-out-alt me-1"></i>Keluar
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sticky saldo -->
+  <div class="container saldo-wrapper">
+    <div class="saldo-display">
+      <div class="saldo-label"><i class="fas fa-wallet me-2"></i>Total Saldo Kas Keamanan</div>
+      <div class="saldo-amount" id="saldoAmount">Rp 0</div>
+      <div class="saldo-update"><i class="fas fa-clock me-1"></i>Update Terakhir: <span id="lastUpdate"></span></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <ul class="nav nav-tabs mb-3" id="mainTabs">
+      <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#dataWarga">Warga</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#iuran">Iuran</a></li>
+      <li class="nav-item" id="sebarIuranTab" style="display:none;"><a class="nav-link" data-bs-toggle="tab" href="#sebarIuran">Sebar Iuran</a></li>
+      <li class="nav-item" id="detailIuranTab" style="display:none;"><a class="nav-link" data-bs-toggle="tab" href="#detailIuran">Detail Iuran</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#updateIuran">Update Iuran</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pengeluaran">Pengeluaran</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#catatan">Catatan</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#laporanKeuangan">Lap Keuangan</a></li>
+      <li class="nav-item" id="pengumumanTab" style="display:none;"><a class="nav-link" data-bs-toggle="tab" href="#pengumumanAdmin">Pengumuman</a></li>
+      <li class="nav-item" id="penggunaTab" style="display:none;"><a class="nav-link" data-bs-toggle="tab" href="#penggunaAdmin">Aktivitas Pengguna</a></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <div class="tab-content">
+      <!-- TAB WARGA -->
+      <div class="tab-pane fade show active" id="dataWarga" role="tabpanel">
+        <div class="card">
+          <div class="card-header card-header-with-action">
+            <h5 class="mb-0"><i class="fas fa-users me-2"></i>Data Warga</h5>
+            <button class="btn btn-primary btn-sm" id="kelolaWargaBtn" style="display:none;" onclick="goToKelolaWarga()">
+              <i class="fas fa-users-cog me-1"></i>Kelola Warga
+            </button>
+          </div>
+          <div class="card-body">
+            <input type="text" class="form-control mb-3" id="searchWarga" placeholder="🔍 Cari nama, nomor rumah, atau dinas...">
+            <div id="wargaList"></div>
+            <div class="show-more-container" id="wargaShowMore" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW KELOLA WARGA -->
+      <div id="kelolaWargaView" style="display:none;">
+        <div class="card">
+          <div class="card-header card-header-with-action">
+            <h5 class="mb-0"><i class="fas fa-users-cog me-2"></i>Kelola Data Warga</h5>
+            <div>
+              <button class="btn btn-secondary btn-sm me-2" onclick="backToWarga()">
+                <i class="fas fa-arrow-left me-1"></i>Kembali
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="showAddWargaModal()">
+                <i class="fas fa-plus me-1"></i>Tambah Warga
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div id="kelolaWargaList"></div>
+            <div class="show-more-container" id="kelolaWargaShowMore" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB IURAN -->
+      <div class="tab-pane fade" id="iuran" role="tabpanel">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-money-bill-wave me-2"></i>Data Iuran</h5>
+            <button class="btn btn-primary btn-sm" id="addIuranBtn" style="display:none;" onclick="showAddIuranModal()"><i class="fas fa-plus"></i> Iuran</button>
+          </div>
+          <div class="card-body">
+            <div id="iuranFilterSectionAdmin" style="display:none;">
+              <div class="filter-row">
+                <div class="filter-item"><label>Cari</label><input type="text" class="form-control" id="searchIuran" placeholder="Cari..."></div>
+                <div class="filter-item"><label>Bulan</label><select class="form-select" id="filterIuranBulanAdmin"><option value="">Semua Bulan</option><option>Januari</option><option>Februari</option><option>Maret</option><option>April</option><option>Mei</option><option>Juni</option><option>Juli</option><option>Agustus</option><option>September</option><option>Oktober</option><option>November</option><option>Desember</option></select></div>
+                <div class="filter-item"><label>Tahun</label><input type="number" class="form-control" id="filterIuranTahunAdmin" placeholder="Tahun"></div>
+                <div class="filter-item"><label>Jenis</label><select class="form-select" id="filterIuranJenisAdmin"><option value="">Semua Jenis</option></select></div>
+                <div class="filter-item"><button class="filter-button" onclick="applyIuranFilterAdmin()"><i class="fas fa-search me-1"></i>Filter</button></div>
+              </div>
+            </div>
+            <div id="iuranList"></div>
+            <div class="show-more-container" id="iuranShowMore" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB SEBAR IURAN -->
+      <div class="tab-pane fade" id="sebarIuran" role="tabpanel">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-bullhorn me-2"></i>Sebar Iuran</h5>
+            <button class="btn btn-primary btn-sm" onclick="showSebarIuranModal()"><i class="fas fa-plus"></i> Sebar Iuran</button>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-info"><i class="fas fa-info-circle me-2"></i>Fitur ini membuat data iuran otomatis untuk semua warga yang belum memiliki iuran pada periode yang dipilih.</div>
+            <div id="sebarIuranList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB DETAIL IURAN -->
+      <div class="tab-pane fade" id="detailIuran" role="tabpanel">
+        <div class="card"><div class="card-header"><h5 class="mb-0"><i class="fas fa-clipboard-list me-2"></i>Detail Iuran</h5></div>
+          <div class="card-body">
+            <div class="filter-container">
+              <div class="filter-row">
+                <div class="filter-item"><label>Bulan</label><select class="form-select" id="detailIuranBulan"><option>Januari</option><option>Februari</option><option>Maret</option><option>April</option><option>Mei</option><option>Juni</option><option>Juli</option><option>Agustus</option><option>September</option><option>Oktober</option><option>November</option><option>Desember</option></select></div>
+                <div class="filter-item"><label>Tahun</label><input type="number" class="form-control" id="detailIuranTahun" value="2024"></div>
+                <div class="filter-item"><label>Jenis</label><select class="form-select" id="detailIuranJenisFilter"><option value="">Semua Jenis</option></select></div>
+                <div class="filter-item"><button class="filter-button" onclick="loadDetailIuran()"><i class="fas fa-search me-1"></i>Cari</button></div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4"><div class="card bg-success text-white text-center p-3"><h5 id="totalLunas">0</h5>Warga Lunas</div></div>
+              <div class="col-md-4"><div class="card bg-danger text-white text-center p-3"><h5 id="totalBelum">0</h5>Warga Belum</div></div>
+              <div class="col-md-4"><div class="card bg-info text-white text-center p-3"><h5 id="totalWarga">0</h5>Total Warga</div></div>
+            </div>
+            <div id="detailIuranList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB UPDATE IURAN -->
+      <div class="tab-pane fade" id="updateIuran" role="tabpanel">
+        <div class="card"><div class="card-header"><h5 class="mb-0"><i class="fas fa-edit me-2"></i>Update Iuran (Belum Bayar)</h5></div>
+          <div class="card-body">
+            <div class="filter-row">
+              <div class="filter-item"><label>Cari</label><input type="text" class="form-control" id="searchUpdateIuran" placeholder="Cari..."></div>
+              <div class="filter-item"><label>Bulan</label><select class="form-select" id="filterUpdateIuranBulan"><option value="">Semua Bulan</option><option>Januari</option><option>Februari</option><option>Maret</option><option>April</option><option>Mei</option><option>Juni</option><option>Juli</option><option>Agustus</option><option>September</option><option>Oktober</option><option>November</option><option>Desember</option></select></div>
+              <div class="filter-item"><label>Tahun</label><input type="number" class="form-control" id="filterUpdateIuranTahun" placeholder="Tahun"></div>
+              <div class="filter-item"><label>Jenis</label><select class="form-select" id="filterUpdateIuranJenis"><option value="">Semua Jenis</option></select></div>
+              <div class="filter-item"><button class="filter-button" onclick="applyUpdateIuranFilter()"><i class="fas fa-search me-1"></i>Filter</button></div>
+            </div>
+            <div id="updateIuranList"></div>
+            <div class="show-more-container" id="updateIuranShowMore" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB PENGELUARAN -->
+      <div class="tab-pane fade" id="pengeluaran" role="tabpanel">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Data Pengeluaran</h5>
+            <button class="btn btn-primary btn-sm" id="addPengeluaranBtn" style="display:none;" onclick="showAddPengeluaranModal()"><i class="fas fa-plus"></i> Pengeluaran</button>
+          </div>
+          <div class="card-body">
+            <div id="pengeluaranList"></div>
+            <div class="show-more-container" id="pengeluaranShowMore" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB CATATAN -->
+      <div class="tab-pane fade" id="catatan" role="tabpanel">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-book me-2"></i>Catatan</h5>
+            <button class="btn btn-primary btn-sm" id="addCatatanBtn" style="display:none;" onclick="showAddCatatanModal()"><i class="fas fa-plus"></i> Catatan</button>
+          </div>
+          <div class="card-body">
+            <div id="catatanList"></div>
+            <div class="show-more-container" id="catatanShowMore" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB LAPORAN KEUANGAN -->
+      <div class="tab-pane fade" id="laporanKeuangan" role="tabpanel">
+        <div class="card"><div class="card-header"><h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Laporan Keuangan per Bulan</h5></div>
+          <div class="card-body"><div id="monthlyReportList"></div></div>
+        </div>
+      </div>
+
+      <!-- TAB PENGUMUMAN (ADMIN) -->
+      <div class="tab-pane fade" id="pengumumanAdmin" role="tabpanel">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-bullhorn me-2"></i>Kelola Pengumuman</h5>
+            <button class="btn btn-primary btn-sm" onclick="showAddPengumumanModal()">
+              <i class="fas fa-plus"></i> Pengumuman
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-info">
+              <i class="fas fa-info-circle me-2"></i>
+              Pengumuman yang <b>AKTIF</b> akan muncul sebagai pop-up kepada semua warga saat mereka login.
+            </div>
+            <div id="pengumumanAdminList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB AKTIVITAS PENGGUNA (ADMIN) -->
+      <div class="tab-pane fade" id="penggunaAdmin" role="tabpanel">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-user-clock me-2"></i>Aktivitas Pengguna</h5>
+            <button class="btn btn-secondary btn-sm" onclick="loadLogAktivitas()">
+              <i class="fas fa-sync me-1"></i>Refresh
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-info">
+              <i class="fas fa-info-circle me-2"></i>
+              Statistik berapa kali setiap warga login ke aplikasi. Berguna untuk memantau keaktifan warga.
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <div class="card text-white text-center p-3" style="background: linear-gradient(135deg, #0d5c3f, #16a34a);">
+                  <h5 id="statTotalLogin">0</h5>
+                  <div>Total Login</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card text-white text-center p-3" style="background: linear-gradient(135deg, #16a34a, #22c55e);">
+                  <h5 id="statWargaAktif">0</h5>
+                  <div>Warga Pernah Login</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card text-white text-center p-3" style="background: linear-gradient(135deg, #d97706, #f59e0b);">
+                  <h5 id="statBelumLogin">0</h5>
+                  <div>Warga Belum Pernah Login</div>
+                </div>
+              </div>
+            </div>
+            <div class="filter-container">
+              <div class="filter-row">
+                <div class="filter-item">
+                  <label>Cari Warga</label>
+                  <input type="text" class="form-control" id="searchPengguna" placeholder="Cari nomor rumah atau nama...">
+                </div>
+                <div class="filter-item">
+                  <label>Urutkan</label>
+                  <select class="form-select" id="sortPengguna">
+                    <option value="terbanyak">Login Terbanyak</option>
+                    <option value="tersedikit">Login Tersedikit</option>
+                    <option value="az">Nomor Rumah (A-Z)</option>
+                  </select>
+                </div>
+                <div class="filter-item">
+                  <button class="filter-button" onclick="renderPenggunaList()">
+                    <i class="fas fa-search me-1"></i>Filter
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div id="penggunaList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Detail Warga -->
+<div class="modal fade" id="detailWargaModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title"><i class="fas fa-user me-2"></i>Detail Warga - <span id="detailNomorRumah"></span></h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body"><div id="wargaDetailContent"></div></div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button><button class="btn btn-primary" id="editWargaBtn" style="display:none;" onclick="showEditWargaModal()">Edit</button></div>
+</div></div></div>
+
+<!-- MODAL: Edit Warga Sendiri -->
+<div class="modal fade" id="editWargaModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Edit Data Saya</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <input type="hidden" id="editUsername">
+    <div class="mb-3"><label class="form-label">Nomor Rumah</label><input type="text" class="form-control" id="editNomorRumah" readonly></div>
+    <div class="mb-3"><label class="form-label">Nama Tampilan <small class="text-muted">(opsional)</small></label><input type="text" class="form-control" id="editNamaTampilan" placeholder="Kosongkan jika ingin pakai nomor rumah"></div>
+    <div class="mb-3"><label class="form-label">Password</label><input type="text" class="form-control" id="editPassword"></div>
+    <div class="mb-3"><label class="form-label">Dinas</label><select class="form-select" id="editDinas"><option>JOG</option><option>YIA</option><option>REG</option><option>DL</option></select></div>
+    <div class="mb-3"><label class="form-label">Nama Suami</label><input type="text" class="form-control" id="editNamaSuami"></div>
+    <div class="mb-3"><label class="form-label">Nama Istri</label><input type="text" class="form-control" id="editNamaIstri"></div>
+    <div class="mb-3"><label class="form-label">Anak (pisah dengan koma)</label><input type="text" class="form-control" id="editAnak"></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveEditWarga()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Add Iuran -->
+<div class="modal fade" id="addIuranModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Tambah Iuran</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <div class="mb-3"><label class="form-label">Nomor Rumah</label><select class="form-select" id="iuranNomorRumah"></select></div>
+    <div class="mb-3"><label class="form-label">Bulan</label><select class="form-select" id="iuranBulan"><option value="">Pilih</option><option>Januari</option><option>Februari</option><option>Maret</option><option>April</option><option>Mei</option><option>Juni</option><option>Juli</option><option>Agustus</option><option>September</option><option>Oktober</option><option>November</option><option>Desember</option></select></div>
+    <div class="mb-3"><label class="form-label">Tahun</label><input type="number" class="form-control" id="iuranTahun"></div>
+    <div class="mb-3"><label class="form-label">Jenis Iuran</label><select class="form-select" id="iuranJenis"></select></div>
+    <div class="mb-3"><label class="form-label">Jumlah</label><input type="number" class="form-control" id="iuranJumlah"></div>
+    <div class="mb-3"><label class="form-label">Status</label><select class="form-select" id="iuranStatus"><option value="lunas">Lunas</option><option value="belum">Belum Bayar</option></select></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveIuran()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Edit Iuran -->
+<div class="modal fade" id="editIuranModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Edit Iuran</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <input type="hidden" id="editIuranId">
+    <div class="mb-3"><label class="form-label">Nomor Rumah</label><input type="text" class="form-control" id="editIuranNomorRumah" readonly></div>
+    <div class="mb-3"><label class="form-label">Periode</label><input type="text" class="form-control" id="editIuranPeriode" readonly></div>
+    <div class="mb-3"><label class="form-label">Jenis</label><select class="form-select" id="editIuranJenis"></select></div>
+    <div class="mb-3"><label class="form-label">Jumlah</label><input type="number" class="form-control" id="editIuranJumlah"></div>
+    <div class="mb-3"><label class="form-label">Status</label><select class="form-select" id="editIuranStatus" onchange="toggleTanggalPelunasan()"><option value="lunas">Lunas</option><option value="belum">Belum Bayar</option></select></div>
+    <div class="mb-3" id="tanggalPelunasanGroup" style="display:none;"><label class="form-label">Tanggal Pelunasan</label><input type="date" class="form-control" id="editIuranTanggalBayar"></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveEditIuran()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Sebar Iuran -->
+<div class="modal fade" id="sebarIuranModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Sebar Iuran</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <div class="mb-3"><label class="form-label">Bulan</label><select class="form-select" id="sebarIuranBulan"><option value="">Pilih</option><option>Januari</option><option>Februari</option><option>Maret</option><option>April</option><option>Mei</option><option>Juni</option><option>Juli</option><option>Agustus</option><option>September</option><option>Oktober</option><option>November</option><option>Desember</option></select></div>
+    <div class="mb-3"><label class="form-label">Tahun</label><input type="number" class="form-control" id="sebarIuranTahun"></div>
+    <div class="mb-3"><label class="form-label">Jenis Iuran</label><select class="form-select" id="sebarIuranJenis"></select></div>
+    <div class="mb-3"><label class="form-label">Jumlah</label><input type="number" class="form-control" id="sebarIuranJumlah"></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveSebarIuran()">Sebar</button></div>
+</div></div></div>
+
+<!-- MODAL: Add Warga -->
+<div class="modal fade" id="addWargaModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Tambah Warga</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <div class="mb-3"><label class="form-label">Nomor Rumah</label><input type="text" class="form-control" id="newNomorRumah"></div>
+    <div class="mb-3"><label class="form-label">Nama Tampilan <small class="text-muted">(opsional)</small></label><input type="text" class="form-control" id="newNamaTampilan" placeholder="Kosongkan jika ingin pakai nomor rumah"></div>
+    <div class="mb-3"><label class="form-label">Password</label><input type="text" class="form-control" id="newPassword"></div>
+    <div class="mb-3"><label class="form-label">Dinas</label><select class="form-select" id="newDinas"><option>JOG</option><option>YIA</option><option>REG</option><option>DL</option></select></div>
+    <div class="mb-3"><label class="form-label">Nama Suami</label><input type="text" class="form-control" id="newNamaSuami"></div>
+    <div class="mb-3"><label class="form-label">Nama Istri</label><input type="text" class="form-control" id="newNamaIstri"></div>
+    <div class="mb-3"><label class="form-label">Anak</label><input type="text" class="form-control" id="newAnak"></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveNewWarga()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Edit Warga Admin -->
+<div class="modal fade" id="editWargaAdminModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Edit Warga</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <input type="hidden" id="editWargaAdminOriginal">
+    <div class="mb-3"><label class="form-label">Nomor Rumah</label><input type="text" class="form-control" id="editWargaAdminNomorRumah"></div>
+    <div class="mb-3"><label class="form-label">Nama Tampilan <small class="text-muted">(opsional)</small></label><input type="text" class="form-control" id="editWargaAdminNamaTampilan" placeholder="Kosongkan jika ingin pakai nomor rumah"></div>
+    <div class="mb-3"><label class="form-label">Password</label><input type="text" class="form-control" id="editWargaAdminPassword"></div>
+    <div class="mb-3"><label class="form-label">Dinas</label><select class="form-select" id="editWargaAdminDinas"><option>JOG</option><option>YIA</option><option>REG</option><option>DL</option></select></div>
+    <div class="mb-3"><label class="form-label">Nama Suami</label><input type="text" class="form-control" id="editWargaAdminNamaSuami"></div>
+    <div class="mb-3"><label class="form-label">Nama Istri</label><input type="text" class="form-control" id="editWargaAdminNamaIstri"></div>
+    <div class="mb-3"><label class="form-label">Anak</label><input type="text" class="form-control" id="editWargaAdminAnak"></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveEditWargaAdmin()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Add Pengeluaran -->
+<div class="modal fade" id="addPengeluaranModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Tambah Pengeluaran</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <div class="mb-3"><label class="form-label">Tanggal</label><input type="date" class="form-control" id="pengeluaranTanggal"></div>
+    <div class="mb-3"><label class="form-label">Keterangan</label><input type="text" class="form-control" id="pengeluaranKeterangan"></div>
+    <div class="mb-3"><label class="form-label">Jumlah</label><input type="number" class="form-control" id="pengeluaranJumlah"></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="savePengeluaran()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Edit Pengeluaran -->
+<div class="modal fade" id="editPengeluaranModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Edit Pengeluaran</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <input type="hidden" id="editPengeluaranId">
+    <div class="mb-3"><label class="form-label">Tanggal</label><input type="date" class="form-control" id="editPengeluaranTanggal"></div>
+    <div class="mb-3"><label class="form-label">Keterangan</label><input type="text" class="form-control" id="editPengeluaranKeterangan"></div>
+    <div class="mb-3"><label class="form-label">Jumlah</label><input type="number" class="form-control" id="editPengeluaranJumlah"></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveEditPengeluaran()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Add Catatan -->
+<div class="modal fade" id="addCatatanModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Tambah Catatan</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <div class="mb-3"><label class="form-label">Tanggal</label><input type="date" class="form-control" id="catatanTanggal"></div>
+    <div class="mb-3"><label class="form-label">Jenis</label><select class="form-select" id="catatanJenis"><option value="info">Info</option><option value="pengumuman">Pengumuman</option><option value="laporan">Laporan</option><option value="iuran">Iuran</option><option value="pengeluaran">Pengeluaran</option><option value="lainnya">Lainnya</option></select></div>
+    <div class="mb-3"><label class="form-label">Keterangan</label><textarea class="form-control" id="catatanKeterangan" rows="3"></textarea></div>
+    <div class="mb-3"><label class="form-label">Jumlah</label><input type="number" class="form-control" id="catatanJumlah" value="0"></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveCatatan()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Edit Catatan -->
+<div class="modal fade" id="editCatatanModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Edit Catatan</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <input type="hidden" id="editCatatanId">
+    <div class="mb-3"><label class="form-label">Tanggal</label><input type="date" class="form-control" id="editCatatanTanggal"></div>
+    <div class="mb-3"><label class="form-label">Jenis</label><select class="form-select" id="editCatatanJenis"><option value="info">Info</option><option value="pengumuman">Pengumuman</option><option value="laporan">Laporan</option><option value="iuran">Iuran</option><option value="pengeluaran">Pengeluaran</option><option value="lainnya">Lainnya</option></select></div>
+    <div class="mb-3"><label class="form-label">Keterangan</label><textarea class="form-control" id="editCatatanKeterangan" rows="3"></textarea></div>
+    <div class="mb-3"><label class="form-label">Jumlah</label><input type="number" class="form-control" id="editCatatanJumlah"></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveEditCatatan()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Detail Keuangan Bulanan -->
+<div class="modal fade" id="financialDetailModal" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Detail Keuangan - <span id="financialDetailMonth"></span></h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body"><div id="financialDetailContent"></div></div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button></div>
+</div></div></div>
+
+<!-- MODAL: Add Pengumuman -->
+<div class="modal fade" id="addPengumumanModal" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Tambah Pengumuman</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label class="form-label">Judul Pengumuman <small class="text-muted">(maks 100 karakter)</small></label>
+      <input type="text" class="form-control" id="pengumumanJudul" maxlength="100" placeholder="Contoh: Kerja Bakti Minggu Ini">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Isi Pengumuman <small class="text-muted">(maks 1000 karakter)</small></label>
+      <textarea class="form-control" id="pengumumanIsi" rows="6" maxlength="1000" placeholder="Tulis isi pengumuman di sini..."></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Tanggal</label>
+      <input type="date" class="form-control" id="pengumumanTanggal">
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="pengumumanAktif" checked>
+      <label class="form-check-label" for="pengumumanAktif">Aktifkan pengumuman (akan tampil sebagai pop-up saat warga login)</label>
+    </div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="savePengumuman()">Simpan</button></div>
+</div></div></div>
+
+<!-- MODAL: Edit Pengumuman -->
+<div class="modal fade" id="editPengumumanModal" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">Edit Pengumuman</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <input type="hidden" id="editPengumumanId">
+    <div class="mb-3">
+      <label class="form-label">Judul Pengumuman</label>
+      <input type="text" class="form-control" id="editPengumumanJudul" maxlength="100">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Isi Pengumuman</label>
+      <textarea class="form-control" id="editPengumumanIsi" rows="6" maxlength="1000"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Tanggal</label>
+      <input type="date" class="form-control" id="editPengumumanTanggal">
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="editPengumumanAktif">
+      <label class="form-check-label" for="editPengumumanAktif">Aktifkan pengumuman</label>
+    </div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary" onclick="saveEditPengumuman()">Simpan Perubahan</button></div>
+</div></div></div>
+
+<!-- MODAL: Pop-up Pengumuman untuk Warga -->
+<div class="modal fade" id="popupPengumumanModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="position: relative;">
+      <div class="modal-header" style="background: linear-gradient(135deg, #0d5c3f, #16a34a); color: white;">
+        <h5 class="modal-title">
+          <i class="fas fa-bullhorn me-2"></i>Pengumuman <span id="popupPengumumanCounter">(1/1)</span>
+        </h5>
+      </div>
+      <div class="modal-body" style="min-height: 200px;">
+        <h5 id="popupPengumumanJudul" class="mb-2" style="color: var(--primary-color);"></h5>
+        <div class="text-muted small mb-3"><i class="fas fa-calendar me-1"></i><span id="popupPengumumanTanggal"></span></div>
+        <div id="popupPengumumanIsi" style="white-space: pre-wrap; line-height: 1.6;"></div>
+      </div>
+      <div class="modal-footer justify-content-between" id="popupNavFooter">
+        <button class="btn btn-outline-secondary" id="popupPrevBtn" onclick="popupPrevPengumuman()"><i class="fas fa-chevron-left"></i></button>
+        <div id="popupDots" style="display: flex; gap: 6px; align-items: center;"></div>
+        <button class="btn btn-outline-secondary" id="popupNextBtn" onclick="popupNextPengumuman()"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" style="position:absolute; top:15px; right:15px; filter: invert(1);" aria-label="Tutup"></button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Notifikasi Sukses Custom -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-body py-4">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+        <h4 id="successTitle" style="color: var(--primary-color);">Berhasil!</h4>
+        <p id="successMessage" class="text-muted mb-0"></p>
+      </div>
+      <div class="modal-footer justify-content-center border-0">
+        <button class="btn btn-primary px-4" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body>
+</html>
