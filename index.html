@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keluarga NDB - RT 06 RW 70</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -27,18 +27,18 @@
     }
 
     /* ============================================================
-       FIX: Kunci horizontal scroll
+       FIX: Horizontal scroll terkunci TANPA memutus sticky
        ============================================================ */
     * { box-sizing: border-box; }
 
-    html, body {
-      overflow-x: hidden;
-      max-width: 100vw;
+    html {
+      overflow-x: clip;
+    }
+    body {
+      overflow-x: clip;
+      max-width: 100%;
       width: 100%;
       position: relative;
-    }
-
-    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(180deg, #f0fdf4 0%, #f8faf9 100%);
       background-attachment: fixed;
@@ -58,7 +58,8 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 50vw;
+      max-width: 40vw;
+      min-width: 0;
     }
     .navbar .btn-outline-light {
       border-color: rgba(255,255,255,0.5);
@@ -104,7 +105,6 @@
       padding-bottom: 10px;
       margin-bottom: 5px;
       max-width: 100%;
-      overflow-x: hidden;
     }
     .saldo-display {
       background: var(--gradient-saldo);
@@ -158,8 +158,6 @@
     /* CONTAINER */
     .container {
       max-width: 100%;
-      padding-left: 12px;
-      padding-right: 12px;
       box-sizing: border-box;
     }
 
@@ -173,7 +171,6 @@
       background: white;
       max-width: 100%;
       box-sizing: border-box;
-      overflow: hidden;
       word-wrap: break-word;
       overflow-wrap: break-word;
     }
@@ -234,7 +231,6 @@
       border: 1px solid var(--border-soft);
       max-width: 100%;
       box-sizing: border-box;
-      overflow: hidden;
     }
     .warga-item:hover {
       background: #f0fdf4;
@@ -255,7 +251,6 @@
       z-index: 999;
       padding: 20px;
       overflow-y: auto;
-      overflow-x: hidden;
     }
     #loginScreen .login-container {
       max-width: 440px;
@@ -529,14 +524,12 @@
     .tab-content {
       position: relative;
       max-width: 100%;
-      overflow-x: hidden;
     }
     .tab-content > .tab-pane {
       min-height: 0;
       padding: 0;
       margin: 0;
       max-width: 100%;
-      overflow-x: hidden;
     }
     .tab-content > .tab-pane.active { display: block; }
     .tab-content > .tab-pane:not(.active) { display: none; }
@@ -576,7 +569,7 @@
       .filter-item { min-width: 100%; }
       .saldo-wrapper { top: 56px; padding-top: 10px; }
       .nav-tabs .nav-link { font-size: 0.85rem; padding: 8px 10px; }
-      .navbar .navbar-text { font-size: 0.85rem; max-width: 40vw; }
+      .navbar .navbar-text { font-size: 0.85rem; max-width: 35vw; }
       .btn-logout-icon i { font-size: 1.1rem; }
     }
   </style>
